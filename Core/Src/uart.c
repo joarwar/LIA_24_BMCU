@@ -1,11 +1,10 @@
-#include "stm32wba55xx.h"            
+#include "stm32wba55xx.h"
+#include "stm32wbaxx_nucleo.h"
 #include "string.h"
 #include "stdio.h"
 #include "float.h"
 #include "stdint.h"
-#include "stm32wbaxx_hal.h"          
 #include "uart.h"
-
 
 
 UART_HandleTypeDef stLink_Uart;

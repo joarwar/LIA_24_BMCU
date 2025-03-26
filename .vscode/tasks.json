@@ -23,7 +23,7 @@
             "label": "clean & build",
             "group": {
                 "kind": "build",
-                "isDefault": true
+                
             },
             "type": "shell",
             "command": "make",
@@ -38,11 +38,13 @@
             "type": "shell",
             "command": "C:\\dev\\tools\\openocd\\bin\\openocd.exe",
             "args": [
+                //"-d3",  
                 "-f",
                 "C:\\dev\\tools\\openocd\\openocd\\scripts\\interface\\stlink.cfg",
                 "-f",
-                "C:\\dev\\tools\\openocd\\openocd\\scripts\\target\\stm32wbx.cfg",  
-                "program ./build/LIA_24_BMCU.elf verify reset exit"  
+                "C:\\dev\\tools\\openocd\\openocd\\scripts\\target\\stm32wbax.cfg",  
+                "-c", 
+                "program ./build/LIA_24_BMCU.elf verify reset exit"
             ],
             "group": {
                 "kind": "build",
@@ -50,7 +52,7 @@
             },
             "problemMatcher": [],
             "detail": "Flashes the firmware to the target using OpenOCD"
-        },
+        },        
         {
             "type": "cppbuild",
             "label": "C/C++: gcc.exe build active file",

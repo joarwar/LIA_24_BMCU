@@ -30,7 +30,6 @@
 #include "lis2dw12_reg.h"          
 #include <stm32wbaxx_hal_rcc.h>
 #include <stm32wba55xx.h>
-#include <stm32wbaxx_hal_icache.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -52,7 +51,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 
-COM_InitTypeDef BspCOMInit;
+//COM_InitTypeDef BspCOMInit;
 
 I2C_HandleTypeDef hi2c1;
 I2C_HandleTypeDef hi2c3;
@@ -71,7 +70,7 @@ static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_I2C3_Init(void);
 static void MX_ICACHE_Init(void);
-//static void MX_USART2_UART_Init(void);
+static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -113,7 +112,7 @@ int main(void)
   MX_I2C1_Init();
   MX_I2C3_Init();
   MX_ICACHE_Init();
-  //MX_USART2_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   uart_Init();
   FIFO_LED_DATA fifoledData;
@@ -126,8 +125,6 @@ int main(void)
   BSP_LED_Init(LED_BLUE);
   BSP_LED_Init(LED_GREEN);
   BSP_LED_Init(LED_RED);
-
-  /* Initialize USER push-button, will be used to trigger an interrupt each time it's pressed.*/
   //Sampling & pulse width
   MAX30102_setSampleRate(_100SPS);
   MAX30102_setPulseWidth(_411_US);
@@ -141,16 +138,16 @@ int main(void)
   //Mode
   MAX30102_setMeasMode(HEART_RATE);
 
-  /* Initialize COM1 port (115200, 8 bits (7-bit data + 1 stop bit), no parity */
-  BspCOMInit.BaudRate   = 115200;
-  BspCOMInit.WordLength = COM_WORDLENGTH_8B;
-  BspCOMInit.StopBits   = COM_STOPBITS_1;
-  BspCOMInit.Parity     = COM_PARITY_NONE;
-  BspCOMInit.HwFlowCtl  = COM_HWCONTROL_NONE;
-  if (BSP_COM_Init(COM1, &BspCOMInit) != BSP_ERROR_NONE)
-  {
-    Error_Handler();
-  }
+  // /* Initialize COM1 port (115200, 8 bits (7-bit data + 1 stop bit), no parity */
+  // BspCOMInit.BaudRate   = 115200;
+  // BspCOMInit.WordLength = COM_WORDLENGTH_8B;
+  // BspCOMInit.StopBits   = COM_STOPBITS_1;
+  // BspCOMInit.Parity     = COM_PARITY_NONE;
+  // BspCOMInit.HwFlowCtl  = COM_HWCONTROL_NONE;
+  // if (BSP_COM_Init(COM1, &BspCOMInit) != BSP_ERROR_NONE)
+  // {
+  //   Error_Handler();
+  // }
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -390,6 +387,35 @@ static void MX_ICACHE_Init(void)
   /* USER CODE END ICACHE_Init 2 */
 
 }
+
+static void MX_USART2_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART2_Init 0 */
+
+  /* USER CODE END USART2_Init 0 */
+
+  /* USER CODE BEGIN USART2_Init 1 */
+
+  /* USER CODE END USART2_Init 1 */
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 115200;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.Mode = UART_MODE_TX_RX;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART2_Init 2 */
+
+  /* USER CODE END USART2_Init 2 */
+
+}
+
 
 /**
   * @brief GPIO Initialization Function

@@ -22,13 +22,13 @@
                 "UNICODE",
                 "_UNICODE",
                 "USE_HAL_DRIVER",
-                "STM32WBxx"
+                "STM32WBAxx"
             ],
             "intelliSenseMode": "gcc-arm",
             "compilerPath": "${env:ARMGCC_DIR}/arm-none-eabi-gcc",
             "compilerArgs": [
-                "-mcpu=cortex-m3",
-                "-mfpu=fpv4-sp-d16",
+                "-mcpu=cortex-m33",
+                "-mfpu=fpv4-sp-d16", 
                 "-mfloat-abi=hard",
                 "-mthumb"
             ],
