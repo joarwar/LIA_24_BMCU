@@ -82,7 +82,7 @@ static uint8_t whoamI, rst;
 static uint8_t tx_buffer[1000];
 
 /* Extern variables ----------------------------------------------------------*/
-extern I2C_HandleTypeDef hi2c2;
+extern I2C_HandleTypeDef hi2c3;
 /* Private functions ---------------------------------------------------------*/
 /*
  *   WARNING:
@@ -136,7 +136,7 @@ void lis2dw12_orientation(void)
   dev_ctx.write_reg = platform_write;
   dev_ctx.read_reg = platform_read;
   dev_ctx.mdelay = platform_delay;
-  dev_ctx.handle = &hi2c2; // Assuming hi2c2 is the I2C handle
+  dev_ctx.handle = &hi2c3; 
 
   /* Wait sensor boot time */
   platform_delay(BOOT_TIME);

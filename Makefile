@@ -62,14 +62,15 @@ Drivers/STM32WBAxx_HAL_Driver/Src/stm32wbaxx_hal_uart.c \
 Core/Src/system_stm32wbaxx.c  \
 Core/Src/sysmem.c \
 Core/Src/syscalls.c \
-Drivers/STM32WBxx_HAL_Driver/Src/stm32wbxx_hal_i2c.c \
-Core/Src/max_sensor.c \	
+Core/Src/max_sensor.c \
 Core/Src/filter_max30102.c \
 Core/Src/uart.c \
 Core/Src/lis2dw12_reg.c \
 Core/Src/lis2dw12_activity.c \
 Core/Src/lis2dw12_tap_single.c \
-Core/Src/lis2dw12_orientation.c \
+Core/Src/lis2dw12_orientation.c
+
+
 
 # ASM sources
 ASM_SOURCES =  \
@@ -203,9 +204,15 @@ $(BUILD_DIR):
 #######################################
 # clean up
 #######################################
+ifeq ($(OS),Windows_NT)
+    CLEAN_CMD = rmdir /s /q $(BUILD_DIR)
+else
+    CLEAN_CMD = rm -fR $(BUILD_DIR)
+endif
+
 clean:
-	-rm -fR $(BUILD_DIR)
-  
+	$(CLEAN_CMD)
+ 
 #######################################
 # dependencies
 #######################################
